@@ -3,18 +3,20 @@
 # http://jlopez.mx
 
 import os
+import time
 import sys
 from datetime import date
 from urlparse import urlparse
 from urlparse import urljoin
 import requests
 from selenium import webdriver
-from collector import publish
+# from collector import publish
+from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 
 
 def setup_driver(_user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:47.0) Gecko/20100101 Firefox/47.0"):
 
-    profile = webdriver.FirefoxProfile()
+    profile = webdriver.FirefoxProfile('firefox.default')
     profile.set_preference('general.useragent.override', _user_agent)
 
     return webdriver.Firefox(profile)
@@ -99,6 +101,10 @@ def view_facebook_page(_driver, _pageId=0, _page=""):
     # get content
     _driver.get(_page)
 
+    WebDriverWait(_driver, 10)
+
+    # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
+
     # parse content
     _raw = _driver.find_element_by_xpath("/html/body").text
 
@@ -146,10 +152,12 @@ try:
     for url in urls:
 
         # go to the google home page
-        facebook_driver.get(url['url'])
+        # facebook_driver.get(url['url'])
 
         # visit a facebook page
         view_facebook_page(facebook_driver, url['id'], url['url'])
+
+        time.sleep(10)
 
         # publish(api, visit)
 
