@@ -188,15 +188,21 @@ try:
 
     urls = json_response['message']
 
+    i = 0
+
     for url in urls:
 
-        # go to the google home page
-        # facebook_driver.get(url['url'])
+        if i >= 10:
 
-        # visit a facebook page
-        view_facebook_page(facebook_driver, url['id'], url['url'])
+            # go to the google home page
+            # facebook_driver.get(url['url'])
 
-        time.sleep(10)
+            # visit a facebook page
+            view_facebook_page(facebook_driver, url['id'], url['url'])
+
+            time.sleep(10)
+
+        i = i + 1
 
         # publish(api, visit)
 
