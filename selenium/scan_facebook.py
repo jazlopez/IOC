@@ -105,6 +105,12 @@ def view_facebook_page(_driver, _pageId=0, _page=""):
 
     WebDriverWait(_driver, 10)
 
+    _driver.execute_script("""
+var element = document.querySelector("#pagelet_growth_expanding_cta");
+if (element)
+    element.parentNode.removeChild(element);
+""")
+
     # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
 
     # parse content
@@ -142,45 +148,45 @@ try:
     screenshots_path = setup_selenium_screenshots_directory()
 
     # anonymous visit to facebook
-    facebook_driver = setup_driver()
+    facebook_driver = authenticate_driver(setup_driver())
 
     # implicit wait
     facebook_driver = setup_implicit_wait(facebook_driver)
 
     # profile = webdriver.FirefoxProfile()
-    profile = webdriver.FirefoxProfile('firefox.default')
-    profile.set_preference('general.useragent.override', ua.random)
+    # profile = webdriver.FirefoxProfile()
+    # profile.set_preference('general.useragent.override', ua.random)
     #
-    driver = webdriver.Firefox(profile)
+    # driver = webdriver.Firefox(profile)
+    # #
+    # driver.implicitly_wait(10)
+
+    #if not os.path.exists("FacebookCookies.pkl"):
+
+    # driver.get("https://www.facebook.com")
+    # assert "Facebook" in driver.title
+    #_usr="jaziel.lopez@wolterskluwer.com", _pwd="wolterskluwer"
+
+    # elem = driver.find_element_by_id("email")
+    # elem.send_keys("jaziel.lopez@wolterskluwer.com")
     #
-    driver.implicitly_wait(10)
+    # elem = driver.find_element_by_id("pass")
+    # elem.send_keys("wolterskluwer")
 
-    if not os.path.exists("FacebookCookies.pkl"):
-
-        driver.get("https://www.facebook.com")
-        # assert "Facebook" in driver.title
-        #_usr="jaziel.lopez@wolterskluwer.com", _pwd="wolterskluwer"
-
-        elem = driver.find_element_by_id("email")
-        elem.send_keys("jaziel.lopez@wolterskluwer.com")
-
-        elem = driver.find_element_by_id("pass")
-        elem.send_keys("wolterskluwer")
-
-        # Facebook does not include another submit button
-        elem = driver.find_element_by_css_selector('input[type="submit"]')
-        elem.click()
+    # Facebook does not include another submit button
+    # elem = driver.find_element_by_css_selector('input[type="submit"]')
+    # elem.click()
 
         # driver.save_screenshot('after-login.png')
 
-        pickle.dump(driver.get_cookies(), open("FacebookCookies.pkl", "wb"))
+    # pickle.dump(driver.get_cookies(), open("FacebookCookies.pkl", "wb"))
 
 
     ## attach
-    driver.get("https://www.facebook.com")
+    # driver.get("https://www.facebook.com")
 
-    for cookie in pickle.load(open("FacebookCookies.pkl", "rb")):
-        driver.add_cookie(cookie)
+    # for cookie in pickle.load(open("FacebookCookies.pkl", "rb")):
+    #     driver.add_cookie(cookie)
 
     request = requests.get('http://stage.obpplatform.com/plugin/ioc/rest.php?router=facebook.sites')
 
@@ -188,21 +194,15 @@ try:
 
     urls = json_response['message']
 
-    i = 0
-
     for url in urls:
 
-        if i >= 10:
+        # go to the google home page
+        # facebook_driver.get(url['url'])
 
-            # go to the google home page
-            # facebook_driver.get(url['url'])
+        # visit a facebook page
+        view_facebook_page(facebook_driver, url['id'], url['url'])
 
-            # visit a facebook page
-            view_facebook_page(facebook_driver, url['id'], url['url'])
-
-            time.sleep(10)
-
-        i = i + 1
+        time.sleep(2)
 
         # publish(api, visit)
 
@@ -230,11 +230,7 @@ except StandardError as _error:
 # # we have to wait for the page to refresh
 # WebDriverWait(driver, 5)
 #
-# driver.execute_script("""
-# var element = document.querySelector("#pagelet_growth_expanding_cta");
-# if (element)
-#     element.parentNode.removeChild(element);
-# """)
+
 #
 # driver.save_screenshot('AmericanExpressUS.png')
 
