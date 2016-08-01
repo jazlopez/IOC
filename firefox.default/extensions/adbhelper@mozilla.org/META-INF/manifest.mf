@@ -1,0 +1,87 @@
+Manifest-Version: 1.0
+
+Name: install.rdf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Of//7qUS//cOkCkEggNnjQ==
+SHA1-Digest: BCYzvqAA2MT3uhEpKaMNsSu5sto=
+
+Name: adb-client.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: aH4Q0u5hk9OpNy1UOnLqPg==
+SHA1-Digest: 3vvf5zS3ZpgY83QIrC+OLyu5lZM=
+
+Name: adb-running-checker.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 7LdmSLff5Jem7PNf8jOPJg==
+SHA1-Digest: /9Z3p5FiKR+A81Si28v1QGJ0xkk=
+
+Name: adb-socket.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: TnXplsjqAN+33cy70qdAlw==
+SHA1-Digest: uxP9rZcsVcgb3uq8vPvWCh/zV6g=
+
+Name: adb.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: aQmctH5GKDHNebajclNdPw==
+SHA1-Digest: xpmYR7+8FKtrD7hN2GzAT+8ftmg=
+
+Name: bootstrap.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: ORmnzBanhjnKU6OsaO+pCQ==
+SHA1-Digest: BCOFCahKaBTULr+Vapp2FTXr+x0=
+
+Name: device.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 62ORus5P8fm+gGnozh5I/Q==
+SHA1-Digest: K5Z29eWMI0APD8I9S506ENxC7BE=
+
+Name: devtools-import.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: xgJ7Pr8vS5vwiPR0a3/vUg==
+SHA1-Digest: kmekSCk1JNqPab2JOzRcW1j54bQ=
+
+Name: devtools-require.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: MJYWbV9j8yK2rLlMvgWAeQ==
+SHA1-Digest: 7DKmUpYZyM9AYRxbCZWk+FGdNg0=
+
+Name: fastboot.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: hijZk4FCvrwiuzPhnAICEQ==
+SHA1-Digest: D+TWDqVXwn8Bdrxgqtti10765+Y=
+
+Name: main.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: PrEzt3r7rA81C3wG5yqNQA==
+SHA1-Digest: yj9aHZx/oui8pW2AfBosZd39mlM=
+
+Name: scanner.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: tqKr1brBstH4PhXbxxBneA==
+SHA1-Digest: Xov6d3ikQwkPQWRD7cJroBAOnCA=
+
+Name: mac64/adb
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: LtWjbSlucIm7j0YQiS6UGg==
+SHA1-Digest: GJpKoC9yr/J8O2SuAJV4wbX9vB4=
+
+Name: mac64/fastboot
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: UK3eeZt7mvf9LsUqDhalow==
+SHA1-Digest: GYOLfhIBYNK/+d5MnyhEO36Z8QU=
+
+Name: mac64/LICENSE
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Ldsj5jsfnDxGqqQZX4GabQ==
+SHA1-Digest: t9XswRIZIbFbZSWM8QAilIvafPg=
+
+Name: mac64/mac-build.patch
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: nOGeUFqX4FQr8SuJrWxX8Q==
+SHA1-Digest: uww5nx9OoCsstapZ7FdyKuo5w3A=
+
+Name: mac64/README
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: seRlssg4PJAVcLSkNghMNA==
+SHA1-Digest: Y7BxMUco4mFcO5RkFFpLfMGxSp4=
+

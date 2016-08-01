@@ -1,0 +1,187 @@
+Manifest-Version: 1.0
+
+Name: install.rdf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: cPQV8fE3esI8asHg/u7Tig==
+SHA1-Digest: jW+UjLzD9I9+Vj5J/CN9uPa/ans=
+
+Name: bootstrap.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 7bXGjs354WXP08z1LJmaUQ==
+SHA1-Digest: hBvzrYsRacNpTOCOH+GOhYBn2mE=
+
+Name: package.json
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: XiHHBSUqOrprnWCoQ8KXgg==
+SHA1-Digest: G263aldeldkxXUaoMtKDTf6YMmo=
+
+Name: README.md
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: eGZfouUqejKDHarXtq1Hxw==
+SHA1-Digest: bgzts0qoj3/bivFwSILiY7+xqL4=
+
+Name: data/building.html
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: DLnmYWO/G9QxyjJ4QACmwQ==
+SHA1-Digest: hzLVtUKh1AsW/56hVv27/8b4pF4=
+
+Name: data/license.html
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: HvOCGPJU3UnckqXD537AHA==
+SHA1-Digest: nG4okySNBwD3hdHXZbz/D4cCulY=
+
+Name: lib/devtools-import.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: xgJ7Pr8vS5vwiPR0a3/vUg==
+SHA1-Digest: kmekSCk1JNqPab2JOzRcW1j54bQ=
+
+Name: lib/devtools-require.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: j4xKhamMmRAIJ6fe2PRZyA==
+SHA1-Digest: 8YpjwD3DkJL313fRBTRHJ2rHqNI=
+
+Name: lib/main.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: cZVsvTpUE/FZLcVPQzGBoA==
+SHA1-Digest: V+6VTRw+59TeQvwPSBZ96UAz1xE=
+
+Name: lib/chromium/console-utils.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 3t/OBObM8JWHkOqsp0QzPQ==
+SHA1-Digest: d8QKiOxz9grV2aLz04oiIQzbgXk=
+
+Name: lib/chromium/highlighter.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Edsgg3cF2AfLoEGU9kLgcg==
+SHA1-Digest: bIDuNt1I0z2dFjIdpAj60ZzjvWg=
+
+Name: lib/chromium/inspector.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: G19llh+zGOLdi6vFdiQyHA==
+SHA1-Digest: uanP+gBvy8uPuC7xJieD0XYY3Vc=
+
+Name: lib/chromium/network-store.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Qupf+ojzt1Gp2yattD6VsA==
+SHA1-Digest: k4g2MRJ+5raIb6W+atQUAWSrj+I=
+
+Name: lib/chromium/preview.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: F37gej3iCfgqMwgdDPj5fQ==
+SHA1-Digest: G901iTsxyhc24zx9W7+7MoAxYVA=
+
+Name: lib/chromium/reflow.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: eGpMlQh9pFrAr82WqASIug==
+SHA1-Digest: DZaMJDk0Ffy7naNTya+53TYRfrI=
+
+Name: lib/chromium/resource-store.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: LecYUIVO23pX7KeRx3c6wQ==
+SHA1-Digest: 58VvO8SWl/0glRvRFNcGNx0E8yo=
+
+Name: lib/chromium/root.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Fgn/aN17PUl+BcQ6DaJeBA==
+SHA1-Digest: 2K5N8gHBeBTPPLyiKGBigfiK8dw=
+
+Name: lib/chromium/rpc.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: kINzKeJ5HUx2M239+zPj1A==
+SHA1-Digest: 9eJGl9dVsMALNPlzeYuHLNAQgm0=
+
+Name: lib/chromium/server.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: G82SFjwjLcsuxunwaPcQ3w==
+SHA1-Digest: KgbOSmqW9hDE/dgYKlR3GLQszNU=
+
+Name: lib/chromium/sheet-store.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 1qTmtO/MLDe+yQp3J53iSw==
+SHA1-Digest: fm9QVLdhVNCJO1CtNA8Uw0DzLng=
+
+Name: lib/chromium/stringify.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: szIY5lZhQodr4aKji1UF8Q==
+SHA1-Digest: ca+46VVdaDeEhZEzKfPFxFtpIIg=
+
+Name: lib/chromium/styles.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 9MJe1bqZ5nMXyIUdcknASQ==
+SHA1-Digest: Za5n16Hy0IR2CW/X8ny9QuEUe/s=
+
+Name: lib/chromium/thread.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: r2tRZguUlVI5/kjNBQu1Bg==
+SHA1-Digest: eeq4lN25S0n/xFY+nezxuQ45zwk=
+
+Name: lib/chromium/value.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: D6EV8vP+odXjqJoFNAm7Og==
+SHA1-Digest: JGbCPc4Kp7B78D6kEVz0+oDM77I=
+
+Name: lib/chromium/walker.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: xx8LrJDV1m5qZfN8kdvcMQ==
+SHA1-Digest: EeLk87eJjN9jEFPlwY8FVXREXyk=
+
+Name: lib/chromium/webconsole.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: GbdmM3Jf1Fsy4lWiClZ52Q==
+SHA1-Digest: ChqU3s820wrhpI6ThOsAhAW9rR8=
+
+Name: lib/util/ios-proxy.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: WMTDA/i8CyT6mTA/nOxRDQ==
+SHA1-Digest: EqPBYhGyPjL52hUwqiWaX28Wz1Q=
+
+Name: lib/util/protocol-extra.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: yjnrJAccC87ksgpF86bCCA==
+SHA1-Digest: 8Y7N63g7PrayBPDTUQk2gM+f7dE=
+
+Name: lib/util/scanner.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: j8+Ztrj9qNx34YHEq+1DRw==
+SHA1-Digest: TvdQ+qLaqhJrgd2qgEA5G5FSH68=
+
+Name: lib/util/task.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Dy7KlNA8Rmccby90R87zRA==
+SHA1-Digest: hj5d5KF1MkjwcQKqInp2Z3wyNeM=
+
+Name: tools/mac64/ios_webkit_debug_proxy
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: En8EUgiOB8XSDid2i+kkCQ==
+SHA1-Digest: 50/b/7uSHEMqRXZTRcIPrtkcrz4=
+
+Name: tools/mac64/libcrypto.1.0.0.dylib
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: RvhlHQJcbOI5F/dhv9hHQw==
+SHA1-Digest: bM1FI5fknZ1slsF/psCy0XjPXls=
+
+Name: tools/mac64/libimobiledevice.4.dylib
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: PNLo/WGZx0rISsxMG7P69g==
+SHA1-Digest: GYTeud8O6IbrlM/Di2yqiYo/cgM=
+
+Name: tools/mac64/libplist.2.dylib
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: dxQekB9/q57MJlt54x+tSw==
+SHA1-Digest: qVru5sv4ZLZTBllR4uACcg6wKog=
+
+Name: tools/mac64/libssl.1.0.0.dylib
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: m2CCvOcWivLBmUL3G7KWqw==
+SHA1-Digest: 46I4TNhhlknP+0CUw2xgyjaCgzE=
+
+Name: tools/mac64/libusbmuxd.2.dylib
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: rDDGBbdih5KTtW/OnHLQoA==
+SHA1-Digest: N8ZB7E/oU+AdTBB7gFJfSWSst6U=
+
+Name: tools/mac64/libxml2.2.dylib
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: biFOKbISbOkRrMK/FWgLMQ==
+SHA1-Digest: ltaZhGVOQEBDv+y6apMziJ5uBdk=
+
