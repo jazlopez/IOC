@@ -5,11 +5,13 @@
 import os
 import time
 import sys
+import pickle
 from datetime import date
 from urlparse import urlparse
 from urlparse import urljoin
 import requests
 from selenium import webdriver
+from fake_useragent import UserAgent
 # from collector import publish
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 
@@ -124,6 +126,8 @@ def view_facebook_page(_driver, _pageId=0, _page=""):
 
 try:
 
+    ua = UserAgent()
+
     # if len(sys.argv) == 1:
     #     raise StandardError("Expected facebook url and api host url to send results: None Received")
     #
@@ -142,6 +146,41 @@ try:
 
     # implicit wait
     facebook_driver = setup_implicit_wait(facebook_driver)
+
+    # profile = webdriver.FirefoxProfile()
+    profile = webdriver.FirefoxProfile('firefox.default')
+    profile.set_preference('general.useragent.override', ua.random)
+    #
+    driver = webdriver.Firefox(profile)
+    #
+    driver.implicitly_wait(10)
+
+    if not os.path.exists("FacebookCookies.pkl"):
+
+        driver.get("https://www.facebook.com")
+        # assert "Facebook" in driver.title
+        #_usr="jaziel.lopez@wolterskluwer.com", _pwd="wolterskluwer"
+
+        elem = driver.find_element_by_id("email")
+        elem.send_keys("jaziel.lopez@wolterskluwer.com")
+
+        elem = driver.find_element_by_id("pass")
+        elem.send_keys("wolterskluwer")
+
+        # Facebook does not include another submit button
+        elem = driver.find_element_by_css_selector('input[type="submit"]')
+        elem.click()
+
+        # driver.save_screenshot('after-login.png')
+
+        pickle.dump(driver.get_cookies(), open("FacebookCookies.pkl", "wb"))
+
+
+    ## attach
+    driver.get("https://www.facebook.com")
+
+    for cookie in pickle.load(open("FacebookCookies.pkl", "rb")):
+        driver.add_cookie(cookie)
 
     request = requests.get('http://stage.obpplatform.com/plugin/ioc/rest.php?router=facebook.sites')
 
