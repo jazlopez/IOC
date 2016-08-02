@@ -145,37 +145,35 @@ try:
     # api = sys.argv[2]
 
     # setup selenium screenshots directory
-    screenshots_path = setup_selenium_screenshots_directory()
-
-    # anonymous visit to facebook
-    facebook_driver = authenticate_driver(setup_driver())
-
-    # implicit wait
-    facebook_driver = setup_implicit_wait(facebook_driver)
-
-    # profile = webdriver.FirefoxProfile()
-    # profile = webdriver.FirefoxProfile()
-    # profile.set_preference('general.useragent.override', ua.random)
+    # screenshots_path = setup_selenium_screenshots_directory()
     #
-    # driver = webdriver.Firefox(profile)
-    # #
-    # driver.implicitly_wait(10)
+    # # anonymous visit to facebook
+    # facebook_driver = authenticate_driver(setup_driver())
+    #
+    # # implicit wait
+    # facebook_driver = setup_implicit_wait(facebook_driver)
+
+    # profile = webdriver.FirefoxProfile()
+    profile = webdriver.FirefoxProfile('firefox.default')
+    profile.set_preference('general.useragent.override', ua.random)
+
+    #
+    driver = webdriver.Firefox(profile)
 
     #if not os.path.exists("FacebookCookies.pkl"):
 
-    # driver.get("https://www.facebook.com")
-    # assert "Facebook" in driver.title
-    #_usr="jaziel.lopez@wolterskluwer.com", _pwd="wolterskluwer"
+    driver.get("https://www.facebook.com")
 
-    # elem = driver.find_element_by_id("email")
-    # elem.send_keys("jaziel.lopez@wolterskluwer.com")
-    #
-    # elem = driver.find_element_by_id("pass")
-    # elem.send_keys("wolterskluwer")
+    elem = driver.find_element_by_id("email")
+    elem.send_keys("jaziel.lopez@wolterskluwer.com")
 
-    # Facebook does not include another submit button
-    # elem = driver.find_element_by_css_selector('input[type="submit"]')
-    # elem.click()
+    elem = driver.find_element_by_id("pass")
+    elem.send_keys("wolterskluwer")
+
+    elem = driver.find_element_by_css_selector('input[type="submit"]')
+    elem.click()
+
+    WebDriverWait(driver, 10)
 
         # driver.save_screenshot('after-login.png')
 
@@ -200,11 +198,41 @@ try:
         # facebook_driver.get(url['url'])
 
         # visit a facebook page
-        view_facebook_page(facebook_driver, url['id'], url['url'])
+        # view_facebook_page(facebook_driver, url['id'], url['url'])
+
+        # get content
+        driver.get(url['url'])
+
+        WebDriverWait(driver, 5)
+
+        driver.execute_script("""
+var element = document.querySelector("#pagelet_growth_expanding_cta");
+if (element)
+    element.parentNode.removeChild(element);
+""")
+
+        # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
+
+        # parse content
+        _raw = driver.find_element_by_xpath("/html/body").text
+
+        # publish page raw result
+        payload = {
+            'router': 'save.facebook.site',
+            'url_id': url['id'],
+            'redirects_to': driver.current_url,
+            'raw': _raw
+
+        }
+
+        response = requests.post('http://stage.obpplatform.com/plugin/ioc/rest.php', data=payload)
+        data = response.json()
+
+        print data
 
         time.sleep(2)
 
-        # publish(api, visit)
+    # publish(api, visit)
 
     # user is logged in facebook
     # facebook_driver = authenticate_driver(setup_driver(), "juan.jaziel@gmail.com", "password")
