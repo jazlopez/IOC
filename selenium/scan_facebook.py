@@ -4,6 +4,7 @@
 
 import os
 import time
+import syslog
 import sys
 import pickle
 from datetime import date
@@ -11,12 +12,15 @@ from urlparse import urlparse
 from urlparse import urljoin
 import requests
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from fake_useragent import UserAgent
 # from collector import publish
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 
-def setup_driver(_user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:47.0) Gecko/20100101 Firefox/47.0"):
+def setup_driver(_user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:45.0) Gecko/20100101 Firefox/45.0"):
 
     profile = webdriver.FirefoxProfile('firefox.default')
     profile.set_preference('general.useragent.override', _user_agent)
@@ -105,12 +109,6 @@ def view_facebook_page(_driver, _pageId=0, _page=""):
 
     WebDriverWait(_driver, 10)
 
-    _driver.execute_script("""
-var element = document.querySelector("#pagelet_growth_expanding_cta");
-if (element)
-    element.parentNode.removeChild(element);
-""")
-
     # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
 
     # parse content
@@ -134,6 +132,12 @@ try:
 
     ua = UserAgent()
 
+    request = requests.get('http://stage.obpplatform.com/plugin/ioc/rest.php?router=facebook.sites')
+
+    json_response = request.json()
+
+    urls = json_response['message']
+
     # if len(sys.argv) == 1:
     #     raise StandardError("Expected facebook url and api host url to send results: None Received")
     #
@@ -154,16 +158,13 @@ try:
     # facebook_driver = setup_implicit_wait(facebook_driver)
 
     # profile = webdriver.FirefoxProfile()
-    profile = webdriver.FirefoxProfile('firefox.default')
-    profile.set_preference('general.useragent.override', ua.random)
-
-    #
-    driver = webdriver.Firefox(profile)
-    driver.implicitly_wait(10)
-
-    #if not os.path.exists("FacebookCookies.pkl"):
+    # profile.set_preference('general.useragent.override', "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:47.0) Gecko/20100101 Firefox/47.0")
+    driver = webdriver.Firefox()
 
     driver.get("https://www.facebook.com")
+    WebDriverWait(driver, 10)
+
+    driver.save_screenshot("before-login.png")
 
     elem = driver.find_element_by_id("email")
     elem.send_keys("jaziel.lopez@wolterskluwer.com")
@@ -174,103 +175,65 @@ try:
     elem = driver.find_element_by_css_selector('input[type="submit"]')
     elem.click()
 
-    # WebDriverWait(driver, 10)
+    WebDriverWait(driver, 10)
 
-        # driver.save_screenshot('after-login.png')
-
-    # pickle.dump(driver.get_cookies(), open("FacebookCookies.pkl", "wb"))
-
-
-    ## attach
-    # driver.get("https://www.facebook.com")
-
-    # for cookie in pickle.load(open("FacebookCookies.pkl", "rb")):
-    #     driver.add_cookie(cookie)
-
-    request = requests.get('http://stage.obpplatform.com/plugin/ioc/rest.php?router=facebook.sites')
-
-    json_response = request.json()
-
-    urls = json_response['message']
+    driver.save_screenshot("post-login.png")
 
     for url in urls:
 
-        # go to the google home page
-        # facebook_driver.get(url['url'])
+        syslog.syslog(syslog.LOG_INFO, 'Changing browser URL to {}'.format(url['url']))
 
-        # visit a facebook page
-        # view_facebook_page(facebook_driver, url['id'], url['url'])
+        error_number = 0
 
-        # get content
-        driver.get(url['url'])
+        try:
 
-        # WebDriverWait(driver, 10)
+            # get content
+            driver.get(url['url'])
 
-        # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
+            WebDriverWait(driver, 10)
 
-        print driver.page_source
+            driver.save_screenshot(str(url['id'] + ".png"))
 
-        # parse content
-        _raw = driver.find_element_by_xpath("/html/body").text
+            # parse content
+            _raw = driver.find_element_by_xpath("/html/body").text
 
-        # publish page raw result
-        payload = {
-            'router': 'save.facebook.site',
-            'url_id': url['id'],
-            'redirects_to': driver.current_url,
-            'raw': _raw
+            if len(_raw) > 0:
 
-        }
+                # publish page raw result
+                payload = {
+                    'router': 'save.facebook.site',
+                    'url_id': url['id'],
+                    'redirects_to': driver.current_url,
+                    'raw': _raw
 
-        response = requests.post('http://stage.obpplatform.com/plugin/ioc/rest.php', data=payload)
-        data = response.json()
+                }
 
-        print data
+                response = requests.post('http://stage.obpplatform.com/plugin/ioc/rest.php', data=payload)
+                data = response.json()
 
-        # time.sleep(10)
+                syslog.syslog(syslog.LOG_INFO, 'URL {} has been saved '.format(url['url']))
 
-    # publish(api, visit)
+                # time.sleep(10)
+                # syslog.syslog(syslog.LOG_INFO, 'Sleep time is over and will continue up to the next url')
+            else:
 
-    # user is logged in facebook
-    # facebook_driver = authenticate_driver(setup_driver(), "juan.jaziel@gmail.com", "password")
+                raise TimeoutException('Page {} has not content: '.format(url['url']))
+
+        except TimeoutException as exception:
+
+            error_number += 1
+
+            driver.save_screenshot('error' + str(error_number) + '.png')
+
+            syslog.syslog(syslog.LOG_ERR, exception.message)
+
+            print exception.message
+
+        finally:
+
+            syslog.syslog(syslog.LOG_INFO, 'Thread set to sleep 10 seconds')
+            time.sleep(10)
+            syslog.syslog(syslog.LOG_INFO, 'Sleep time is over and will continue up to the next url')
 
 except StandardError as _error:
     print _error.message
-
-
-#
-# elem = driver.find_element_by_css_selector(".input.textInput")
-# elem.send_keys("Posted using Python's Selenium WebDriver bindings!")
-# elem = driver.find_element_by_css_selector("input[value=\"Publicar\"]")
-# elem.click()
-#
-
-# we have to wait for the page to refresh
-# WebDriverWait(driver, 5)
-#
-# driver.save_screenshot('landing.png')
-#
-# driver.get("https://www.facebook.com/AmericanExpressUS")
-#
-# # we have to wait for the page to refresh
-# WebDriverWait(driver, 5)
-#
-
-#
-# driver.save_screenshot('AmericanExpressUS.png')
-
-# driver.get("https://www.facebook.com/PowerBar")
-#
-# # we have to wait for the page to refresh
-# WebDriverWait(driver, 5)
-#
-# driver.execute_script("""
-# var element = document.querySelector("#pagelet_growth_expanding_cta");
-# if (element)
-#     element.parentNode.removeChild(element);
-# """)
-#
-#
-# driver.save_screenshot('PowerBar.png')
-
-# driver.close()
