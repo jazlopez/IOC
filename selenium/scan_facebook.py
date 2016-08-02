@@ -159,6 +159,7 @@ try:
 
     #
     driver = webdriver.Firefox(profile)
+    driver.implicitly_wait(10)
 
     #if not os.path.exists("FacebookCookies.pkl"):
 
@@ -173,7 +174,7 @@ try:
     elem = driver.find_element_by_css_selector('input[type="submit"]')
     elem.click()
 
-    WebDriverWait(driver, 10)
+    # WebDriverWait(driver, 10)
 
         # driver.save_screenshot('after-login.png')
 
@@ -203,7 +204,7 @@ try:
         # get content
         driver.get(url['url'])
 
-        WebDriverWait(driver, 10)
+        # WebDriverWait(driver, 10)
 
         # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
 
@@ -226,7 +227,7 @@ try:
 
         print data
 
-        time.sleep(2)
+        # time.sleep(10)
 
     # publish(api, visit)
 
