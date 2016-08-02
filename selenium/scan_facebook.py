@@ -205,13 +205,9 @@ try:
 
         WebDriverWait(driver, 10)
 
-        driver.execute_script("""
-var element = document.querySelector("#pagelet_growth_expanding_cta");
-if (element)
-    element.parentNode.removeChild(element);
-""")
-
         # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
+
+        print driver.page_source
 
         # parse content
         _raw = driver.find_element_by_xpath("/html/body").text
