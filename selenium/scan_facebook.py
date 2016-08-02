@@ -203,7 +203,7 @@ try:
         # get content
         driver.get(url['url'])
 
-        WebDriverWait(driver, 5)
+        WebDriverWait(driver, 10)
 
         driver.execute_script("""
 var element = document.querySelector("#pagelet_growth_expanding_cta");
