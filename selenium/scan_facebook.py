@@ -164,7 +164,7 @@ try:
     driver.get("https://www.facebook.com")
     WebDriverWait(driver, 10)
 
-    driver.save_screenshot("before-login.png")
+    # driver.save_screenshot("before-login.png")
 
     elem = driver.find_element_by_id("email")
     elem.send_keys("jaziel.lopez@wolterskluwer.com")
@@ -177,7 +177,7 @@ try:
 
     WebDriverWait(driver, 10)
 
-    driver.save_screenshot("post-login.png")
+    # driver.save_screenshot("post-login.png")
 
     for url in urls:
 
@@ -192,7 +192,7 @@ try:
 
             WebDriverWait(driver, 10)
 
-            driver.save_screenshot(str(url['id'] + ".png"))
+            # driver.save_screenshot(str(url['id'] + ".png"))
 
             # parse content
             _raw = driver.find_element_by_xpath("/html/body").text
