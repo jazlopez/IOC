@@ -223,7 +223,7 @@ try:
 
             error_number += 1
 
-            driver.save_screenshot('error' + str(error_number) + '.png')
+            # driver.save_screenshot('error' + str(error_number) + '.png')
 
             syslog.syslog(syslog.LOG_ERR, exception.message)
 
