@@ -63,7 +63,7 @@ def view_twitter_page(_driver, _pageId=0, _page=""):
     WebDriverWait(_driver, 5)
 
     # parse content
-    _raw = _driver.find_element_by_xpath('//*[@id="timeline"').text
+    _raw = _driver.find_element_by_xpath('//*[@id="timeline"]').text
 
     # publish page raw result
     payload = {
@@ -71,7 +71,6 @@ def view_twitter_page(_driver, _pageId=0, _page=""):
         'url_id': _pageId,
         'redirects_to': _driver.current_url,
         'raw': _raw
-
     }
 
     response = requests.post('http://stage.obpplatform.com/plugin/ioc/rest.php', data=payload)
