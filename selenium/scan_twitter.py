@@ -62,10 +62,8 @@ def view_twitter_page(_driver, _pageId=0, _page=""):
 
     WebDriverWait(_driver, 5)
 
-    # _driver.save_screenshot(_page.replace('/', '//').lower() + '.png')
-
     # parse content
-    _raw = _driver.find_element_by_xpath("/html/body").text
+    _raw = _driver.find_element_by_xpath('//*[@id="timeline"').text
 
     # publish page raw result
     payload = {
