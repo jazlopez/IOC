@@ -13,6 +13,7 @@ import requests
 from selenium import webdriver
 from fake_useragent import UserAgent
 # from collector import publish
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 
 
@@ -62,21 +63,27 @@ def view_twitter_page(_driver, _pageId=0, _page=""):
 
     WebDriverWait(_driver, 5)
 
-    # parse content
-    _raw = _driver.find_element_by_xpath('//*[@id="timeline"]').text
+    try:
 
-    # publish page raw result
-    payload = {
-        'router': 'save.twitter.site',
-        'url_id': _pageId,
-        'redirects_to': _driver.current_url,
-        'raw': _raw
-    }
+        # parse content
+        _raw = _driver.find_element_by_xpath('//*[@id="timeline"]').text
 
-    response = requests.post('http://stage.obpplatform.com/plugin/ioc/rest.php', data=payload)
-    data = response.json()
+        # publish page raw result
+        payload = {
+            'router': 'save.twitter.site',
+            'url_id': _pageId,
+            'redirects_to': _driver.current_url,
+            'raw': _raw
+        }
 
-    print data
+        response = requests.post('http://stage.obpplatform.com/plugin/ioc/rest.php', data=payload)
+        data = response.json()
+
+        print data
+
+    except NoSuchElementException:
+        print _page + " has returned not tweet container and will move forward to the next url"
+
 
 try:
 
