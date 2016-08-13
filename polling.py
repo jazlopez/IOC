@@ -13,6 +13,20 @@ from sqlalchemy.sql.expression import null, and_
 from sqlalchemy.orm.session import sessionmaker
 
 
+DEFAULT_TAG_ID = 4
+traceback_template = '''ERROR:\n File "%(filename)s" line: %(lineno)s,\n in %(message)s''' # Skipping the "actual line" item
+
+def import_raw_data(import_engine):
+
+    import_connection = import_engine.raw_connection()
+    cursor = import_connection.cursor()
+    cursor.callproc("ioc_sp_import_cache")
+    results = list(cursor.fetchall())
+    cursor.close()
+    import_connection.commit()
+
+    print "Result after import raw data {}".format(results)
+
 def print_analysis_exception():
     # http://docs.python.org/2/library/sys.html#sys.exc_info
     exc_type, exc_value, exc_traceback = sys.exc_info() # most recent (if any) by default
@@ -38,9 +52,6 @@ def print_analysis_exception():
     # Ignore built in exception format message
     print traceback.format_exc()
     print traceback_template % traceback_details
-
-DEFAULT_TAG_ID = 4
-traceback_template = '''ERROR:\n File "%(filename)s" line: %(lineno)s,\n in %(message)s''' # Skipping the "actual line" item
 
 metadata = MetaData()
 
@@ -155,6 +166,8 @@ sess_maker = sessionmaker(bind=engine)
 sess_polling = sess_maker()
 
 try:
+
+    import_raw_data(engine)
 
     scans = sess_polling\
         .query(IocScans.id, IocScans.exact_word)\
