@@ -7,6 +7,8 @@ import re
 import sys
 import datetime
 import traceback
+import pytz
+from pytz import timezone
 from sqlalchemy import create_engine, func, Table, MetaData, Column, Integer, String, DateTime, Text
 from sqlalchemy.orm import mapper
 from sqlalchemy.sql.expression import null, and_
@@ -15,6 +17,8 @@ from sqlalchemy.orm.session import sessionmaker
 
 DEFAULT_TAG_ID = 4
 traceback_template = '''ERROR:\n File "%(filename)s" line: %(lineno)s,\n in %(message)s''' # Skipping the "actual line" item
+tz_pacific_time = timezone('US/Pacific')
+
 
 def import_raw_data(import_engine):
 
@@ -64,8 +68,8 @@ ioc_scans = Table('ioc_scans', metadata,
                   Column('exact_word', String(1024), nullable=False),
                   Column('is_scrapy_scan', Integer, nullable=False),
                   Column('results_found', Integer, nullable=False),
-                  Column('updated_at', DateTime, default=datetime.datetime.utcnow),
-                  Column('last_run_at', DateTime, default=datetime.datetime.utcnow))
+                  Column('updated_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
+                  Column('last_run_at', DateTime, default=datetime.datetime.now(tz_pacific_time)))
 
 """
 ioc_url_raw metadata
@@ -92,8 +96,8 @@ ioc_scan_detections = Table('ioc_scan_detections', metadata,
     Column('url_id', Integer, default=0, nullable=False),
     Column('raw_id', Integer, default=0, nullable=False),
     Column('detections', Integer, default=0, nullable=False),
-    Column('created_at', DateTime, default=datetime.datetime.utcnow),
-    Column('updated_at', DateTime, default=datetime.datetime.utcnow))
+    Column('created_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
+    Column('updated_at', DateTime, default=datetime.datetime.now(tz_pacific_time)))
 
 ioc_scan_url_raw_results = Table('ioc_scan_url_raw_results', metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
@@ -101,8 +105,8 @@ ioc_scan_url_raw_results = Table('ioc_scan_url_raw_results', metadata,
     Column('url_id', Integer, default=0, nullable=False),
     Column('raw_id', Integer, default=0, nullable=False),
     Column('tag_id', Integer, default=4, nullable=False),
-    Column('created_at', DateTime, default=datetime.datetime.utcnow),
-    Column('updated_at', DateTime, default=datetime.datetime.utcnow),
+    Column('created_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
+    Column('updated_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
     Column('deleted_at', DateTime, nullable=True))
 
 ioc_view_scan_url_raw_results = Table('ioc_view_scan_url_raw_results', metadata,
@@ -260,8 +264,8 @@ try:
                 except Exception as error:
                     raise Exception(error.message)
 
-        processed_scan.updated_at = datetime.datetime.utcnow()
-        processed_scan.last_run_at = datetime.datetime.utcnow()
+        processed_scan.updated_at = datetime.datetime.now(tz_pacific_time)
+        processed_scan.last_run_at = datetime.datetime.now(tz_pacific_time)
 
         sess_polling.commit()
 
