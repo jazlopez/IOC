@@ -213,7 +213,7 @@ try:
             url_id = raw.url_id
 
             clean_exact_word = row.exact_word.strip()
-            clean_raw_text = re.sub('\s+', '', raw_text)
+            clean_raw_text = raw_text.strip()
 
             matches = re.finditer(clean_exact_word, clean_raw_text, flags=re.IGNORECASE)
 
