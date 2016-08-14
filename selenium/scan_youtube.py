@@ -111,7 +111,7 @@ try:
 
             WebDriverWait(driver, 10)
 
-            if len(driver.page_source):
+            if not len(driver.page_source):
                 raise WebDriverException
 
             # parse content
