@@ -217,8 +217,9 @@ try:
 
             matches = re.finditer(clean_exact_word, clean_raw_text, flags=re.IGNORECASE)
 
-            print "Running findall results: {}"\
-                .format(re.findall(clean_exact_word, clean_raw_text, flags=re.IGNORECASE))
+            if re.findall(clean_exact_word, clean_raw_text, flags=re.IGNORECASE):
+                print "By running findall found the following matches: {}"\
+                    .format(len(re.findall(clean_exact_word, clean_raw_text, flags=re.IGNORECASE)))
 
             for match in matches:
                 detections += 1
