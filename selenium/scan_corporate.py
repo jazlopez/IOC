@@ -85,7 +85,7 @@ def view_corporate_page(_driver, _pageId=0, _page=""):
         print _page + " has encountered an error and will move forard to the next url\n-{}".format(_error.message)
     except NoSuchElementException:
         print _page + " has returned not html at all and will move forward to the next url"
-    except WebDriverException:
+    except WebDriverException as _error:
         print "{} has returned an error and will move forward to the next url\nERROR: {}".format(_page, _error.message)
 
 try:
