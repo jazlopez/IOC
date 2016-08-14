@@ -68,8 +68,8 @@ ioc_scans = Table('ioc_scans', metadata,
                   Column('exact_word', String(1024), nullable=False),
                   Column('is_scrapy_scan', Integer, nullable=False),
                   Column('results_found', Integer, nullable=False),
-                  Column('updated_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
-                  Column('last_run_at', DateTime, default=datetime.datetime.now(tz_pacific_time)))
+                  Column('updated_at', DateTime, default=datetime.datetime.now()),
+                  Column('last_run_at', DateTime, default=datetime.datetime.now()))
 
 """
 ioc_url_raw metadata
@@ -96,8 +96,8 @@ ioc_scan_detections = Table('ioc_scan_detections', metadata,
     Column('url_id', Integer, default=0, nullable=False),
     Column('raw_id', Integer, default=0, nullable=False),
     Column('detections', Integer, default=0, nullable=False),
-    Column('created_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
-    Column('updated_at', DateTime, default=datetime.datetime.now(tz_pacific_time)))
+    Column('created_at', DateTime, default=datetime.datetime.now()),
+    Column('updated_at', DateTime, default=datetime.datetime.now()))
 
 ioc_scan_url_raw_results = Table('ioc_scan_url_raw_results', metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
@@ -105,8 +105,8 @@ ioc_scan_url_raw_results = Table('ioc_scan_url_raw_results', metadata,
     Column('url_id', Integer, default=0, nullable=False),
     Column('raw_id', Integer, default=0, nullable=False),
     Column('tag_id', Integer, default=4, nullable=False),
-    Column('created_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
-    Column('updated_at', DateTime, default=datetime.datetime.now(tz_pacific_time)),
+    Column('created_at', DateTime, default=datetime.datetime.now()),
+    Column('updated_at', DateTime, default=datetime.datetime.now()),
     Column('deleted_at', DateTime, nullable=True))
 
 ioc_view_scan_url_raw_results = Table('ioc_view_scan_url_raw_results', metadata,
@@ -264,8 +264,8 @@ try:
                 except Exception as error:
                     raise Exception(error.message)
 
-        processed_scan.updated_at = datetime.datetime.now(tz_pacific_time)
-        processed_scan.last_run_at = datetime.datetime.now(tz_pacific_time)
+        processed_scan.updated_at = datetime.datetime.now()
+        processed_scan.last_run_at = datetime.datetime.now()
 
         sess_polling.commit()
 
