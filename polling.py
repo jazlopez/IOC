@@ -212,13 +212,20 @@ try:
             raw_text = raw.raw
             url_id = raw.url_id
 
-            matches = re.finditer(row.exact_word, raw_text, re.UNICODE)
+            clean_exact_word = row.exact_word.strip()
+            clean_raw_text = re.sub('\s+', '', raw_text)
+
+            matches = re.finditer(clean_exact_word, clean_raw_text, flags=re.IGNORECASE)
+
+            print "Running findall results: {}"\
+                .format(re.findall(clean_exact_word, clean_raw_text, flags=re.IGNORECASE))
 
             for match in matches:
                 detections += 1
 
                 # TODO: add this line to debug file log
-                print "\t\tDetection found: match starts at character index: {} and ends at character index: {}".format(match.start(), match.end())
+                print "\t\tDetection found: match starts at character index: {} and ends at character index: {}"\
+                    .format(match.start(), match.end())
 
             if detections:
 
@@ -236,7 +243,7 @@ try:
                     is_match_stored = sess_polling.query(IocScanUrlRawResults)\
                         .filter(and_(IocScanUrlRawResults.scan_id == scan_id, IocScanUrlRawResults.url_id == url_id, IocScanUrlRawResults.deleted_at == null())).first()
 
-                    if not is_match_stored :
+                    if not is_match_stored:
 
                         print \
                             "\t\tAnalysis will create a key in \"ioc_scan_url_raw_results\" for scan {} and url {}"\
